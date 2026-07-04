@@ -5,9 +5,9 @@
         "update_url": null
     },
     "exported_at": "2026-07-04T02:00:00+07:00",
-    "name": "Egg PM2 PRoot (VPS) by zakkixd",
+    "name": "Egg PM2 (Linux System with Root Access)",
     "author": "zakkixd@developer.id",
-    "description": "Egg PM2 PRoot (VPS) by zakkixd\r\nMenggunakan PRoot untuk mengunduh OS Linux secara dinamis saat pertama kali booting.\r\nDukung multi-version Node.js v16 s/d v24 (NVM), Bun, Python3, PHP, Nginx, PM2 Latest, NPM Latest, Cloudflared Tunnel, dan Speedtest CLI.",
+    "description": "Egg PM2 (Linux System with Root Access)\r\nMenjalankan aplikasi Node.js dengan PM2 pada sistem operasi Linux (Ubuntu/Debian) dengan akses root penuh tanpa membebani server Pterodactyl.\r\nDukung multi-version Node.js v16 s/d v24 (NVM), Bun, Python3, PHP, Nginx, PM2 Latest, NPM Latest, Cloudflared Tunnel, dan Speedtest CLI.",
     "features": null,
     "docker_images": {
         "Pterodactyl PRoot Host (zakkixd)": "ghcr.io/mrlow12/egg-pm2-proot:latest"
