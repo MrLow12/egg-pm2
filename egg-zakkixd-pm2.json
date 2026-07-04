@@ -6,7 +6,7 @@
     },
     "exported_at": "2026-07-04T02:00:00+07:00",
     "name": "Egg PM2 by zakkixd (Multi-OS)",
-    "author": "zakkixd@developer.id",
+    "author": "admin@zakki.store",
     "description": "Egg PM2 by zakkixd (Multi-OS: Ubuntu & Debian)\r\nSolusi profesional untuk menjalankan aplikasi Node.js dengan PM2 di Pterodactyl Panel menggunakan OS Ubuntu/Debian.\r\nDukung multi-version Node.js v16 s/d v24 (NVM), PM2 Latest, NPM Latest, Auto-update Git, Cloudflared Tunnel, dan Speedtest CLI.",
     "features": null,
     "docker_images": {
