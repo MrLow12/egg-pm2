@@ -79,7 +79,8 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Bun (Globally accessible)
-RUN env HOME=/root curl -fsSL https://bun.sh/install | bash && \
+RUN export BUN_INSTALL=/root/.bun && \
+    curl -fsSL https://bun.sh/install | bash && \
     mv /root/.bun/bin/bun /usr/local/bin/bun && \
     rm -rf /root/.bun
 
