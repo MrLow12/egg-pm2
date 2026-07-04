@@ -37,6 +37,9 @@ jobs:
           echo "version=3.5.0" >> $GITHUB_OUTPUT
           echo "revision=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
           echo "created=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_OUTPUT
+          echo "owner_lowercase=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
@@ -54,7 +57,7 @@ jobs:
           context: ./native
           file: ./native/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/egg-pm2:${{ matrix.tag }}
+          tags: ghcr.io/${{ steps.meta.outputs.owner_lowercase }}/egg-pm2:${{ matrix.tag }}
           build-args: |
             BASE_IMAGE=${{ matrix.base_image }}
             IMAGE_VERSION=${{ steps.meta.outputs.version }}
