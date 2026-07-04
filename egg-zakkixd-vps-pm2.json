@@ -1,0 +1,92 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2026-07-04T02:00:00+07:00",
+    "name": "Egg PM2 PRoot (VPS) by zakkixd",
+    "author": "zakkixd@developer.id",
+    "description": "Egg PM2 PRoot (VPS) by zakkixd\r\nMenggunakan PRoot untuk mengunduh OS Linux secara dinamis saat pertama kali booting.\r\nDukung multi-version Node.js v16 s/d v24 (NVM), Bun, Python3, PHP, Nginx, PM2 Latest, NPM Latest, Cloudflared Tunnel, dan Speedtest CLI.",
+    "features": null,
+    "docker_images": {
+        "Pterodactyl PRoot Host (zakkixd)": "ghcr.io/mrlow12/egg-pm2-proot:latest"
+    },
+    "file_denylist": [],
+    "startup": "export NVM_DIR=\"/root/.nvm\"; [ -s \"$NVM_DIR/nvm.sh\" ] && . \"$NVM_DIR/nvm.sh\"; nvm use {{NODE_VERSION}}; if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then /usr/local/bin/npm install ${NODE_PACKAGES}; fi; if [[ ! -z ${UNNODE_PACKAGES} ]]; then /usr/local/bin/npm uninstall ${UNNODE_PACKAGES}; fi; if [ -f /home/container/package.json ]; then npm install; fi; pm2 start {{JS_FILE}} --name zakkixd-app --no-daemon",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"zakkixd\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!/bin/bash\r\n# ================================================================\r\n# Installation Script — Egg PM2 PRoot by zakkixd\r\n# Developer: zakkixd\r\n# ================================================================\r\n\r\nRED='\\033[1;31m'\r\nGREEN='\\033[1;32m'\r\nCYAN='\\033[1;36m'\r\nYELLOW='\\033[1;33m'\r\nMAGENTA='\\033[1;35m'\r\nWHITE='\\033[1;37m'\r\nNC='\\033[0m'\r\n\r\nclear\r\necho -e \"${CYAN}\"\r\necho \"  ███████╗ █████╗ ██╗  ██╗██╗  ██╗██╗██╗  ██╗██████╗ \"\r\necho \"  ╚══███╔╝██╔══██╗██║ ██╔╝██║ ██╔╝██║╚██╗██╔╝██╔══██╗\"\r\necho \"    ███╔╝ ███████║█████╔╝ █████╔╝ ██║ ╚███╔╝ ██║  ██║\"\r\necho \"   ███╔╝  ██╔══██║██╔═██╗ ██╔═██╗ ██║ ██╔██╗ ██║  ██║\"\r\necho \"  ███████╗██║  ██║██║  ██╗██║  ██╗██║██╔╝ ██╗██████╔╝\"\r\necho \"  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚═════╝ \"\r\necho -e \"${NC}\"\r\necho -e \"${MAGENTA}[ Installation Script — Egg PM2 PRoot by zakkixd ]${NC}\"\r\necho \"\"\r\n\r\napt update\r\napt install -y git curl wget tar procps lsb-release\r\n\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\n# Clone atau download project\r\nif [ ! -z \"${GITHUB_URL}\" ]; then\r\n    echo -e \"${CYAN}[zakkixd] Cloning repository: ${GITHUB_URL}${NC}\"\r\n    git clone ${GITHUB_URL} .\r\nfi\r\n\r\necho -e \"${GREEN}[zakkixd] ✓ Installation step complete!${NC}\"",
+            "container": "ghcr.io/mrlow12/egg-pm2-proot:latest",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Node.js Version",
+            "description": "Versi Node.js yang ingin dijalankan (Gunakan angka saja). Contoh: 16, 18, 20, 22, 24 atau 'latest'.",
+            "env_variable": "NODE_VERSION",
+            "default_value": "24",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:10",
+            "field_type": "text"
+        },
+        {
+            "name": "JS File",
+            "description": "File JavaScript utama yang akan dijalankan PM2. Contoh: index.js, bot.js, app.js",
+            "env_variable": "JS_FILE",
+            "default_value": "index.js",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Set ke 1 agar server otomatis melakukan git pull setiap kali restart.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "GitHub Repository URL",
+            "description": "URL repository GitHub yang akan di-clone saat instalasi. Kosongkan jika upload manual.",
+            "env_variable": "GITHUB_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:256",
+            "field_type": "text"
+        },
+        {
+            "name": "NPM Extra Packages",
+            "description": "Paket npm tambahan yang ingin diinstall. Pisahkan dengan spasi. Contoh: axios dotenv",
+            "env_variable": "NODE_PACKAGES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "NPM Uninstall Packages",
+            "description": "Paket npm yang ingin diuninstall. Pisahkan dengan spasi.",
+            "env_variable": "UNNODE_PACKAGES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        }
+    ]
+}
